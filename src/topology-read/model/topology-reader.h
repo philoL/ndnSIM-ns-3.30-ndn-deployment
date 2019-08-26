@@ -32,6 +32,8 @@
 
 namespace ns3 {
 
+class NodeContainer;
+
 /**
  * \ingroup topology
  *

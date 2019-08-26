@@ -1,3 +1,4 @@
+from __future__ import print_function
 import ns.point_to_point
 import ns.csma
 import ns.wifi
