@@ -43,7 +43,7 @@ drop <- suppressMessages(read_tsv(str_c(folder,"drop.txt")))
 	ggplot(aes(x=Time, y=DelayS*1000)) +
 	geom_line(size=0.8) +
 	ylab("RTT [ms]") +
-	xlab("Time [m]")) 
+	xlab("Time [s]")) 
 
 
 # height = 2.7, width=4.35
