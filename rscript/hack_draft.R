@@ -39,7 +39,11 @@ rates   %>% filter(Node == "N0", Type=="InData" )
 		expand_limits(y=0) +
 		facet_wrap(~ Type))
 
+drop
 
+g.drop <- drop %>%
+	ggplot(aes (x=Time, y=Kilobytes)) +
+	geom_line(size=0.8)
 
 rtt = as_tibble(read.csv(sep=c('\t', ' '),"rtt_smallq.txt"))
 
@@ -66,6 +70,7 @@ g.cwnd
 
 # height = 2.7, width=4.35
 ggsave("../plots/rates.pdf", g.rates, device=cairo_pdf)
+ggsave("../plots/drop.pdf", g.drop, device=cairo_pdf)
 ggsave("../plots/cwnd.pdf", g.cwnd, device=cairo_pdf)
 ggsave("../plots/rtt.pdf", g.rtt, device=cairo_pdf)
 
