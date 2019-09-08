@@ -45,27 +45,25 @@ g.drop <- drop %>%
 	ggplot(aes (x=Time, y=Kilobytes)) +
 	geom_line(size=0.8)
 
-rtt = as_tibble(read.csv(sep=c('\t', ' '),"rtt_smallq.txt"))
+# rtt = as_tibble(read.csv(sep=c('\t', ' '),"rtt_smallq.txt"))
+# rtt2 <- gather(rtt, "type", "val", -segment)
 
-rtt2 <- gather(rtt, "type", "val", -segment)
+(g.delay <- delay %>% #filter(Type=="LastDelay") %>%
+	ggplot(aes(x=Time, y=DelayS*1000)) +
+	geom_line(size=0.8) +
+	ylab("RTT [s]") +
+	xlab("Time [ms]")) 
+	# geom_point(size=2) +
 
-g.rtt <-  ggplot(data=rtt2, aes(x=segment, y=val, color=type)) +
-	geom_line() +
-	geom_point(size=2) +
-	ylab("RTT") +
-	xlab("Segment") +
-	scale_y_continuous(limits = c(0, 1000)) +
-	theme(legend.position = "top") 
-g.rtt
-	
-g.cwnd <-  ggplot(data=cwnd, aes(x=time, y=cwndsize)) +
-	geom_line() +
-	geom_point(size=2) +
-	ylab("Cwnd") +
-	xlab("Time [s]") +
-	scale_shape_manual(values=seq(0,10))
-# facet_grid(~ var)
-g.cwnd
+# delay
+# g.cwnd <-  ggplot(data=cwnd, aes(x=time, y=cwndsize)) +
+# 	geom_line() +
+# 	geom_point(size=2) +
+# 	ylab("Cwnd") +
+# 	xlab("Time [s]") +
+# 	scale_shape_manual(values=seq(0,10))
+# # facet_grid(~ var)
+# g.cwnd
 
 
 # height = 2.7, width=4.35
