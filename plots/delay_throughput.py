@@ -31,7 +31,7 @@ def main():
       full_delays.append(l[5])
       rtx_counts.append(l[7])
 
-  plt.plot(times, full_delays)
+  plt.plot([times[i] for i in range(len(times)) if i % 100 == 0], [full_delays[i] for i in range(len(full_delays)) if i % 100 == 0])
   plt.xlabel('Time (s)')
   plt.ylabel('Full Delays (s)')
   plt.savefig('delay.png')
