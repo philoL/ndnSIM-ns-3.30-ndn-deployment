@@ -1,11 +1,10 @@
 setwd("/home/klaus/backup_ccn/ndnSIM-ns-3.30-ndn-deployment/rscript")
 
-### Other Libraries ### 
+### Libraries ### 
 suppressMessages(library(tidyverse))
 library(magrittr, warn.conflicts = F)
-library(gridExtra, warn.conflicts = F)
-library(zoo, warn.conflicts = F) # For rolling mean.
-
+# library(gridExtra, warn.conflicts = F)
+# library(zoo, warn.conflicts = F) # For rolling mean.
 
 # theme_set(theme_bw(base_size = 12, base_family = "CM Sans"))
 theme_set(theme_bw() + theme( strip.background=element_blank(), 
@@ -22,7 +21,6 @@ rates <- suppressMessages(read_tsv(str_c(folder,"rates.txt"), guess_max = 200000
 delay <- suppressMessages(read_tsv(str_c(folder,"delay.txt")))
 drop <- suppressMessages(read_tsv(str_c(folder,"drop.txt")))
 
-# rates   %>% filter(Node == "N0", Type=="InData" )
 
 (g.rates <- rates %>% filter(Node == "N0", Type=="OutData", FaceId==258 ) %>%
 		ggplot(aes (x=Time, y=(Kilobytes*8)/1024, color=FaceId)) +
@@ -34,16 +32,16 @@ drop <- suppressMessages(read_tsv(str_c(folder,"drop.txt")))
 		expand_limits(y=0) +
 		facet_wrap(~ Type))
 
-(g.drop <- drop %>%
-	ggplot(aes (x=Time, y=Kilobytes)) +
-	geom_line(size=0.8))
-
-
 (g.delay <- delay %>% #filter(Type=="LastDelay") %>%
 	ggplot(aes(x=Time, y=DelayS*1000)) +
 	geom_line(size=0.8) +
 	ylab("RTT [ms]") +
 	xlab("Time [s]")) 
+
+
+(g.drop <- drop %>%
+		ggplot(aes (x=Time, y=Kilobytes)) +
+		geom_line(size=0.8))
 
 
 # height = 2.7, width=4.35
